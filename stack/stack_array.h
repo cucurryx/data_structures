@@ -1,7 +1,7 @@
 #include<stdlib.h>
 #include<stdio.h>
 
-typedef int Item;
+typedef char Item;
 struct StackRecord
 {
 	int Capacity;
