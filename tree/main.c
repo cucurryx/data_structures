@@ -5,9 +5,10 @@ int main()
 	searchTree myTree = CreatTree(5);
 	int i;
 
-	for(i=0; i<10; ++i)
-		Insert(i, myTree);
-	printf("%d  %d\n",Retrieve(Find(9,myTree)), Retrieve(FindMin(myTree)));
-	printf("%d",Retrieve(myTree));
+	for(i=0; i<100; ++i)
+		myTree = Insert(i, myTree);
+	printf("Max:%d  Min:%d\n",Retrieve(FindMax(myTree)), Retrieve(FindMin(myTree)));
+	printf("Root:%d",Retrieve(myTree));
+
 	return 0;
 }
