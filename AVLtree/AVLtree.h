@@ -206,3 +206,18 @@ Item Retrieve(Position P)
 {
 	return P->item;
 }
+
+void printItem(Item item)
+{
+	printf("%d ", item);
+}
+
+void PrintTree(AvlTree T)
+{
+	if(T != NULL)
+	{
+		PrintTree(T->left);
+		printItem(T->item);
+		PrintTree(T->right);
+	}
+}
