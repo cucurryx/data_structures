@@ -1,5 +1,5 @@
-# code of Data structures
-the formal data structures writte in C
+# code of Data Structures
+these are the formal data structures writte in C,
 including list, stack, queue, tree, AvlTree, HashTable and so on
 and I just write some fundamental functions
 >for example, The **Insert()** of AvlTree
