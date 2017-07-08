@@ -73,7 +73,10 @@ void Error(int errorInfo)
 		exit(0);
 	}
 	else
-		;
+	{
+		printf("Some error!");
+		exit(0);
+	}
 }
 AvlTree Insert(Item X, AvlTree T)
 {
