@@ -34,7 +34,7 @@ void Error(int ErrorInfo);
 int NextPrime(int x);
 int IsPrime(int x);
 int Hash(Item Key, int TableSize);
-int NeedRehash(HashTable H);
+int NeedRehash(HashTable H, double RehashPara);
 
 HashTable InitializeTable(int TableSize)
 {
@@ -181,7 +181,7 @@ int Hash(Item Key, int TableSize)
 	return Key % NextPrime(TableSize);
 }
 
-int NeedRehash(HashTable H)
+int NeedRehash(HashTable H, double RehashPara = 0.5)
 {
 	int ItemCount, i;
 
@@ -192,7 +192,10 @@ int NeedRehash(HashTable H)
 			++ItemCount;
 	}
 
-	if(ItemCount >= H->TableSize / 2)
+	if(RehashPara >= 1.0)
+		RehashPara = 0.5;
+		
+	if(ItemCount >= H->TableSize * RehashPara)
 		return 1;
 	else
 		return 0;
