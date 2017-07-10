@@ -1,6 +1,6 @@
 # code of Data Structures
 部分基础数据结构以及基本操作函数-c代码实现
-包括 list, stack, queue, tree, AvlTree, HashTable(HashQuad and HashSep)
+包括 list, stack, queue, tree, AvlTree, HashTable(HashQuad and HashSep), heap
 
 > for example, The **Insert()** of AvlTree
 
@@ -90,3 +90,7 @@
   	return CurrentPos;
   }
   ```
+
+  >二叉堆(heap)指的是完全二叉树，即每个节点都有两个儿子。
+
+  **二叉堆的实现实际上是通过线性的整块内存，而不是指针实现**，因为元素之间存在很强的规律性，比如位置i的父亲一定是在i/2位置，而这个节点的左、右儿子分别是在 2*i、 2*i+1。
