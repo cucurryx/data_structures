@@ -9,6 +9,9 @@ PriorityQueue Initialize();
 ElementType FindMin(PriorityQueue H);
 int IsEmpty(PriorityQueue H);
 PriorityQueue Merge(PriorityQueue H1, PriorityQueue H2);
+void MidPrint(PriorityQueue H);
+void BeforePrint(PriorityQueue H);
+void AfterPrint(PriorityQueue H);
 
 #define Insert(X, H) (H = Insert1(X, H))
 #define DeleteMin(H) (H = DeleteMin1(H), FindMin(H))  //wrong DeleteMin
@@ -115,4 +118,34 @@ PriorityQueue DeleteMin1(PriorityQueue H)
 	RightHeap = H->Right;
 	free(H);
 	return Merge(LeftHeap, RightHeap);
+}
+
+void MidPrint(PriorityQueue H)
+{
+	if(H == NULL)
+		return;
+
+	MidPrint(H->Left);
+	printf("%d ", H->Element);
+	MidPrint(H->Right);
+}
+
+void BeforePrint(PriorityQueue H)
+{
+	if(H == NULL)
+		return;
+
+	printf("%d ", H->Element);
+	BeforePrint(H->Left);
+	BeforePrint(H->Right);
+}
+
+void AfterPrint(PriorityQueue H)
+{
+	if(H == NULL)
+		return;
+
+	AfterPrint(H->Left);
+	AfterPrint(H->Right);
+	printf("%d ", H->Element);
 }

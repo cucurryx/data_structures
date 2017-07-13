@@ -22,6 +22,15 @@ int main()
 	myHeapOne = Merge(myHeapOne, myHeapTwo);
 	printf("%d ", DeleteMin(myHeapOne));
 	printf("%d \n", myHeapOne->Npl);
-	
+
+	printf("\nMidPrint: ");
+	MidPrint(myHeapTwo);
+
+	printf("\nBeforePrint: ");
+	BeforePrint(myHeapTwo);
+
+	printf("\nAfterPrint: ");
+	AfterPrint(myHeapTwo);
+
 	return 0;
 }
