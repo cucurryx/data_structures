@@ -106,7 +106,7 @@ Item DeleteMin(PriorityQueue H)
 			break;
 	}
 	H->Items[i] = LastItem;
-	
+
 	return MinItem;
 }
 
