@@ -94,11 +94,11 @@ Item DeleteMin(PriorityQueue H)
 	MinItem = H->Items[1];
 	LastItem = H->Items[H->Size--];
 
-	for(i = 1; i * 2 <= H->Size; i = Child)
+	for(i = 1; i*2 <= H->Size; i = Child)
 	{
-		Child = 2*i;
+		Child = 2 * i;
 		if(Child != H->Size && H->Items[Child] > H->Items[Child+1])
-			Child++;
+			++Child;
 
 		if(LastItem > H->Items[Child])
 			H->Items[i] = H->Items[Child];
@@ -106,6 +106,7 @@ Item DeleteMin(PriorityQueue H)
 			break;
 	}
 	H->Items[i] = LastItem;
+	
 	return MinItem;
 }
 
