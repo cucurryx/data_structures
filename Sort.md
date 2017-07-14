@@ -53,6 +53,8 @@ void ShellSort(ElementType A[], int ArraySize)
 ## Heapsort
 **堆排序(Heapsort)** 利用建立二叉堆的基本方法，然后执行DeleteMin的操作。建立二叉堆是O(N),而每次DeleteMin操作的时间花费是O(logN)，因此总的运行时间是O(N logN)。这个算法是用数组来模拟二叉堆，然后将DeleteMin的结果放在数组的结尾，最后可以得到一个有序数列。
 
+堆排序总是使用至少NlogN - O(N)次比较，平均情形2NlogN - O(N)，不过平均情形还没有得到证明。
+
 ```
 void Heapsort(ElementType A[], int N)
 {
@@ -66,3 +68,6 @@ void Heapsort(ElementType A[], int N)
 	}
 }
 ```
+
+## Mergesort
+**归并排序(Mergesort)** 以O(NlogN)最坏情形运行时间运行，几乎是最优的，采用了递归算法来实现。基本操作就是合并两个已排序的表，得到一个排序了的序列。合并两个已排序的表的时间是线性的。
