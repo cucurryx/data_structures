@@ -1,5 +1,6 @@
 #include<stdio.h>
 #include<stdlib.h>
+#include<time.h>
 typedef int ElementType;
 
 void Merge(ElementType A[], ElementType TmpArray[], int LeftBgn, int RightBgn, int RightEnd)
@@ -60,13 +61,18 @@ int main()
 	FILE * fpIn = fopen("input.txt", "rt");
 	FILE * fpOut = fopen("output.txt", "wt");
 	int i, a[1000000];
+	size_t bgTime, edTime;
 
 	for(i = 0; i < 100000; ++i)
 		fscanf(fpIn, "%d", &a[i]);
+
+	bgTime = clock();
 	Mergesort(a, 100000);
+	edTime = clock();
+
 	for(i = 0; i < 100000; ++i)
 		fprintf(fpOut, "%d ", a[i]);
-	printf("Finished");
+	printf("Finished %fms", (edTime-bgTime)/1000.0);
 
 	fclose(fpIn);
 	fclose(fpOut);

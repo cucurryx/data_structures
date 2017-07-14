@@ -71,3 +71,30 @@ void Heapsort(ElementType A[], int N)
 
 ## Mergesort
 **归并排序(Mergesort)** 以O(NlogN)最坏情形运行时间运行，几乎是最优的，采用了递归算法来实现。基本操作就是合并两个已排序的表，得到一个排序了的序列。合并两个已排序的表的时间是线性的。
+
+```
+void Merge(ElementType A[], ElementType TmpArray[], int LeftBgn, int RightBgn, int RightEnd)
+{
+	int i, LeftEnd, TmpPos, TotalCount;
+
+	LeftEnd = RightBgn-1;
+	TmpPos = LeftBgn;
+	TotalCount = RightEnd - LeftBgn + 1;
+
+	while(LeftBgn <= LeftEnd && RightBgn <= RightEnd)
+	{
+		if(A[LeftBgn] <= A[RightBgn])
+			TmpArray[TmpPos++] = A[LeftBgn++];
+		else
+			TmpArray[TmpPos++] = A[RightBgn++];
+	}
+
+	while(LeftBgn <= LeftEnd)
+		TmpArray[TmpPos++] = A[LeftBgn++];
+	while(RightBgn <= RightEnd)
+		TmpArray[TmpPos++] = A[RightBgn++];
+
+	for(i = 0; i < TotalCount; i++, RightEnd--)  //copy TmpArray to A
+		A[RightEnd] = TmpArray[RightEnd];
+}
+```
