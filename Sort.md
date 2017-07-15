@@ -98,3 +98,41 @@ void Merge(ElementType A[], ElementType TmpArray[], int LeftBgn, int RightBgn, i
 		A[RightEnd] = TmpArray[RightEnd];
 }
 ```
+
+## Quicksort
+**快速排序(Quicksort)** 是已知最快的排序算法，和归并排序一样，都是分治的策略。基本算法由四个简单的步骤组成：
+
+1. 如果数列中元素的个数是0或者1，则返回
+2. 数列中任取元素作为枢纽元
+3. 将数列（除去枢纽元）分为两个部分，分别是大于枢纽元的部分和小于枢纽元的部分
+4. 递归求解
+
+```
+void Qsort(ElementType A[], int Left, int Right)
+{
+	int i, j;
+	ElementType Pivot;
+
+	if(Left + Cutoff <= Right)
+	{
+		Pivot = Median3(A, Left, Right);
+		i = Left;
+		j = Right -1;
+		for(;;)
+		{
+			while(A[++i] < Pivot);
+			while(A[--j] > Pivot);
+			if(i < j)
+				Swap(&A[i], &A[j]);
+			else
+				break;
+		}
+		Swap(&A[i], &A[Right-1]);
+
+		Qsort(A, Left, i-1);
+		Qsort(A, i+1, Right);
+	}
+	else
+		InsertSort(A + Left, Right - Left + 1);
+}
+```
