@@ -7,6 +7,7 @@ int main()
 	for(int i = 0; i < 100; ++i)
 		myQueue.push(i);
 	//myQueue.show();
+	
 	for(int i = 0; i < 100; ++i)
 	{
 		cout<<myQueue.top()<<" ";

@@ -25,6 +25,7 @@ public:
 		for(auto x: elements)
 			cout<<x<<" "<<endl;
 	}
+	
 private:
 	void resizeQueue();
 	vector<T> elements;
