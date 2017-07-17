@@ -1,71 +1,56 @@
 #include"RBtree.h"
+//set 需要实现insert(const T&), erase(const T&), clear(), count(const T&), empty(), size()
 
 template <typename T>
-class Set
+class mySet
 {
 public:
-	Set();
-	~Set(){}
-	bool add(const T& key);
-	bool contains(const T& key);
-	bool remove(const T& key);
-	bool isEmpty();
-	size_t size();
+	void insert(const T&);
+	void erase(const T&);
 	void clear();
+	int count(const T&);
+	bool empty();
+	int size();
 private:
-	RBtree<T>* tree;
-	size_t count;
+	RedBlackBST<T> tree;
 };
 
 template <typename T>
-Set<T>::Set()
+void mySet<T>::insert(const T& key)
 {
-	tree = new RBtree<T>;
-	count = 0;
+	tree.insert(key);
 }
 
 template <typename T>
-bool Set<T>::add(const T& key)
+void mySet<T>::erase(const T& key)
 {
-	if(contains(key))
-		return false;
-	tree->insert(key, tree->rootNode());
-	++count;
-	return true;
+	if(tree.count(key) == 0)
+		return;
+	tree.deleteKey(key);
 }
 
 template <typename T>
-bool Set<T>::contains(const T& key)
+void mySet<T>::clear()
 {
-	treeNode<T>* node = find(key, tree->rootNode());
-	return node != NULL;
+	tree.clear();
 }
 
 template <typename T>
-bool Set<T>::remove(const T& key)
+int mySet<T>::count(const T& key)
 {
-	if(!contains(key))
-		return false;
-	tree->erase(key, *tree);
-	--count;
-	return true;
+	if(tree.find(key) == NULL)
+		return 0;
+	return 1;
 }
 
 template <typename T>
-bool Set<T>::isEmpty()
+bool mySet<T>::empty()
 {
-	return count == 0;
+	return tree.empty();
 }
 
 template <typename T>
-size_t Set<T>::size()
+int mySet<T>::size()
 {
-	return count;
-}
-
-template <typename T>
-void Set<T>::clear()
-{
-	tree->freeTree(*tree);
-	count = 0;
+	return tree.size();
 }

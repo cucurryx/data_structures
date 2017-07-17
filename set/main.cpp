@@ -2,12 +2,13 @@
 
 int main()
 {
-	Set<int> mySet;
-	mySet.add(0);
-	cout<<"a"<<endl;
-	mySet.add(3);
-	cout<<"b"<<endl;
-	cout<<mySet.size()<<endl;
-
+	mySet<double> testSet;
+	for(int i = 0; i < 10; ++i)
+		testSet.insert(i + 0.5);
+	testSet.erase(1.5);
+	for(int i = 0; i < 8; ++i)
+		testSet.erase(i+0.5);
+//	testSet.clear();
+	cout<<testSet.size()<<endl;
 	return 0;
 }
