@@ -1,170 +1,71 @@
-#include<iostream>
-#include<algorithm>
-using namespace std;
+#include"RBtree.h"
 
 template <typename T>
-class treeNode
+class Set
 {
 public:
-	treeNode():	parent(NULL), left(NULL), right(NULL){}
-	treeNode(T _element): parent(NULL), left(NULL),
-	right(NULL), element(_element){}
+	Set();
+	~Set(){}
+	bool add(const T& key);
+	bool contains(const T& key);
+	bool remove(const T& key);
+	bool isEmpty();
+	size_t size();
+	void clear();
 private:
-	treeNode *parent;
-	treeNode *left;
-	treeNode *right;
-	T element;
-	bool isRed;
+	RBtree<T>* tree;
+	size_t count;
 };
 
 template <typename T>
-class RBtree
+Set<T>::Set()
 {
-public:
-	RBtree();
-	size_t getSize();
-	treeNode<T> *find(const T &val, treeNode<T>* node);
-	bool empty();
-	void insert(const T &val, treeNode<T>* node);
-	void erase(const T &val, treeNode<T>* node);
-private:
-	treeNode<T> *findMin(treeNode<T>* node);
-	treeNode<T> *findMax(treeNode<T>* node);
-	void leftRotate(treeNode<T>* node);
-	void rightRotate(treeNode<T>* node);
-	void fixInsert(treeNode<T>* node);
-	void fixErase(treeNode<T>* node);
-	treeNode<T> *root;
-	size_t size;
-};
-
-template <typename T>
-RBtree<T>::RBtree()
-{
-	root = new treeNode<T>;
-	root->isRed = false;
-	size = 0;
+	tree = new RBtree<T>;
+	count = 0;
 }
 
 template <typename T>
-size_t RBtree<T>::getSize()
+bool Set<T>::add(const T& key)
 {
-	return size;
+	if(contains(key))
+		return false;
+	tree->insert(key, tree->rootNode());
+	++count;
+	return true;
 }
 
 template <typename T>
-treeNode<T> *find(const T &val, treeNode<T> node)
+bool Set<T>::contains(const T& key)
 {
-	if(node == NULL)
-		return NULL;
-	if(val < node->element)
-		return find(val, node->left);
-	else if(val > node->element)
-		return find(val, node->right);
-	else
-		return node;
+	treeNode<T>* node = find(key, tree->rootNode());
+	return node != NULL;
 }
 
 template <typename T>
-bool RBtree<T>::empty()
+bool Set<T>::remove(const T& key)
 {
-	return size == 0;
+	if(!contains(key))
+		return false;
+	tree->erase(key, *tree);
+	--count;
+	return true;
 }
 
 template <typename T>
-void RBtree<T>::insert(const T &val, treeNode<T> *node)
+bool Set<T>::isEmpty()
 {
-	treeNode<T> pos = root;
-	if(node == NULL)
-	{
-		node = new treeNode<T>;
-		node->left = NULL;
-		node->right = NULL;
-		node->parent = pos->parent;
-	    node->element = val;
-		node->isRed = true;
-		fixInsert(node);
-	}
-	else if(val < root->element)
-	{
-		insert(val, node->left);
-		pos = pos->left;
-	}
-	else if(val > root->element)
-	{
-		insert(val, node->right);
-		pos = pos->right;
-	}
+	return count == 0;
 }
 
 template <typename T>
-treeNode<T> *RBtree<T>::findMin(treeNode<T>* node)
+size_t Set<T>::size()
 {
-	if(node->left == NULL)
-		return node;
-	else
-		return findMin(node->left);
+	return count;
 }
 
 template <typename T>
-treeNode<T> *RBtree<T>::findMax(treeNode<T>* node)
+void Set<T>::clear()
 {
-	if(node->right == NULL)
-		return node;
-	else
-		return findMax(node->right);
-}
-
-template <typename T>
-void RBtree<T>::leftRotate(treeNode<T>* node)
-{
-	treeNode<T> tmp = node->right;
-	node->right = tmp->left;
-	if(tmp->left != NULL)
-		tmp->left->parent = node;
-	tmp->parent = node->parent;
-	if(node->parent == NULL)
-		root = tmp;
-	else
-	{
-		if(node->parent->left == node)
-			node->parent->left = tmp;
-		else
-			node->parent->right = tmp;
-	}
-	tmp->left = node;
-	node->parent = tmp;
-}
-
-template <typename T>
-void RBtree<T>::rightRotate(treeNode<T>* node)
-{
-	treeNode<T> tmp = node->left;
-	node->left = tmp->right;
-	if(tmp->right != NULL)
-		tmp->left->parent = node;
-	tmp->parent = node->parent;
-	if(node->parent == NULL)
-		root = tmp;
-	else
-	{
-		if(node->parent->left == node)
-			node->parent->left = tmp;
-		else
-			node->parent->right = tmp;
-	}
-	tmp->right = node;
-	node->parent = tmp;
-}
-
-template <typename T>
-void RBtree<T>::fixInsert(treeNode<T>* node)
-{
-
-}
-
-template <typename T>
-void RBtree<T>::fixErase(treeNode<T>* node)
-{
-
+	tree->freeTree(*tree);
+	count = 0;
 }
