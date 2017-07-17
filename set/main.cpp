@@ -10,5 +10,6 @@ int main()
 		testSet.erase(i+0.5);
 //	testSet.clear();
 	cout<<testSet.size()<<endl;
+	cout<<testSet.findMin()<<" "<<testSet.findMax()<<endl;
 	return 0;
 }

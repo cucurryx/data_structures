@@ -8,6 +8,10 @@ public:
 	void insert(const T&);
 	void erase(const T&);
 	void clear();
+	void deleteMin();
+	void deleteMax();
+	T findMin();
+	T findMax();
 	int count(const T&);
 	bool empty();
 	int size();
@@ -33,6 +37,30 @@ template <typename T>
 void mySet<T>::clear()
 {
 	tree.clear();
+}
+
+template <typename T>
+void mySet<T>::deleteMin()
+{
+	tree.deleteMin();
+}
+
+template <typename T>
+void mySet<T>::deleteMax()
+{
+	tree.deleteMax();
+}
+
+template <typename T>
+T mySet<T>::findMin()
+{
+	return tree.findMin()->key;
+}
+
+template <typename T>
+T mySet<T>::findMax()
+{
+	return tree.findMax()->key;
 }
 
 template <typename T>
