@@ -1,0 +1,32 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/xvvx/code/c/set_cpp/main.cpp
+set.h
+/home/xvvx/code/c/set_cpp/set.h
+time.h
+-
+
+/home/xvvx/code/c/set_cpp/rb_tree.cpp
+rb_tree.h
+/home/xvvx/code/c/set_cpp/rb_tree.h
+
+/home/xvvx/code/c/set_cpp/rb_tree.h
+iostream
+-
+iomanip
+-
+
+/home/xvvx/code/c/set_cpp/set.cpp
+set.h
+/home/xvvx/code/c/set_cpp/set.h
+
+/home/xvvx/code/c/set_cpp/set.h
+rb_tree.h
+/home/xvvx/code/c/set_cpp/rb_tree.h
+

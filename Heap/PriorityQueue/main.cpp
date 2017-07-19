@@ -2,11 +2,9 @@
 
 int main()
 {
-	priority_queue<int> myQueue;
-
+	Priority_queue myQueue;
 	for(int i = 0; i < 100; ++i)
-		myQueue.push(i);
-	//myQueue.show();
+		myQueue.push(double(i));
 
 	for(int i = 0; i < 100; ++i)
 	{

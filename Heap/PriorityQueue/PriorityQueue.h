@@ -1,104 +1,72 @@
+#include <algorithm>
 #include<iostream>
 #include<vector>
-#include<algorithm>
-#define Child(i) (2*i);
 using namespace std;
-//priorty_queue 需要实现 empty(), size(), top(), push(const T&), pop()方法
+using T = double;
 
-
-template <typename T>
-class priority_queue
+class Priority_queue
 {
 public:
-	priority_queue();
-	priority_queue(size_t , T);
-	~priority_queue(){}
-
-	bool empty();
-	size_t size();
-	T top();
-	void push(const T&);
-	void pop();
-
-	void show()
-	{
-		for(auto x: elements)
-			cout<<x<<" "<<endl;
-	}
-	
+	Priority_queue(): count(0){}
+    bool empty() const;
+    size_t size() const;
+    const T& top() const;
+    void push(const T& val);
+    void pop();
 private:
-	void resizeQueue();
-	vector<T> elements;
-	size_t queueSize;
+	void reSize();
+	size_t count;
+ 	vector<T> vec;
 };
 
-template <typename T>
-void priority_queue<T>::resizeQueue()
+void Priority_queue::reSize()
 {
-	if(elements.size() == 0)
-		elements.resize(1);
-	if(elements.size()-1 == queueSize)
-		elements.resize(2 * elements.size());
+	if(vec.size() == 0)
+		vec.resize(1);
+	if(count == vec.size()-1)
+		vec.resize(vec.size()*2);
 }
 
-template <typename T>
-priority_queue<T>::priority_queue():
-	elements(), queueSize(0){}
-
-template <typename T>
-priority_queue<T>::priority_queue(size_t _queueSize, T element):
-	elements(queueSize, element), queueSize(_queueSize){}
-
-template <typename T>
-bool priority_queue<T>::empty()
+bool Priority_queue::empty() const
 {
-	return queueSize == 0;
+	return size() == 0;
 }
 
-template <typename T>
-size_t priority_queue<T>::size()
+size_t Priority_queue::size() const
 {
-	return queueSize;
+	return count;
 }
 
-template <typename T>
-T priority_queue<T>::top()
+const T& Priority_queue::top() const
+{
+	return *(++vec.begin());
+}
+
+void Priority_queue::push(const T& val)
+{
+	reSize();
+	int i = ++count;
+	for(; vec[i/2] > val && i > 1; i /= 2)
+		vec[i] = vec[i/2];
+	vec[i] = val;
+}
+
+void Priority_queue::pop()
 {
 	if(empty())
-	{
-		cout<<"Error: Empty queue"<<endl;
-		exit(0);
-	}
-	return elements[1];
-}
+		return;
 
-template <typename T>
-void priority_queue<T>::push(const T& newVal)
-{
-	resizeQueue();
-	int pos;
-	for(pos = ++queueSize; pos > 1 && elements[pos/2] > newVal; pos /= 2)
-		elements[pos] = elements[pos/2];
-	elements[pos] = newVal;
-}
-
-template <typename T>
-void priority_queue<T>::pop()
-{
-	if(empty())
-		exit(0);
-	T temp = elements[queueSize--];
-	int child, i;
-	for(i = 1; 2*i <= queueSize; i = child)
+	T tmp = vec[count--];
+	int i, child;
+	for(i = 1; 2*i <= count; i = child)
 	{
 		child = 2*i;
-		if(elements[child+1] < elements[child] && child != queueSize)
+		if(vec[child] > vec[child+1] && child != count)
 			++child;
-
-		if(elements[child] < temp)
-			elements[i] = elements[child];
+		if(tmp > vec[child])
+			vec[i] = vec[child];
 		else
 			break;
 	}
-	elements[child] = temp;
+	vec[i] = tmp;
 }

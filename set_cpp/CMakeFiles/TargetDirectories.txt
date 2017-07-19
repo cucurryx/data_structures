@@ -1,0 +1,3 @@
+/home/xvvx/code/c/set_cpp/CMakeFiles/rebuild_cache.dir
+/home/xvvx/code/c/set_cpp/CMakeFiles/edit_cache.dir
+/home/xvvx/code/c/set_cpp/CMakeFiles/set_cpp.dir
