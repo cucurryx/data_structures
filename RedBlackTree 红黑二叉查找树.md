@@ -1,7 +1,7 @@
 # RedBlackTree 红黑二叉查找树
 
 
-##定义
+## 定义
 > 相比二叉查找树，红黑树的每个结点多了颜色信息，并且满足下面条件：
 > 1. 每个结点都需要被着色， 红/黑。
 > 2. 根节点root为黑色。
@@ -44,7 +44,7 @@ void rb_tree::insert(rb_tree_node* &root, rb_tree_node* node)
 {
     rb_tree_node* x = root;
     rb_tree_node* x_parent = NULL;
-    
+
     while(x != NULL)
     {
         x_parent = x;
@@ -93,9 +93,9 @@ Node* RedBlackBST::insert(Node* h, const T& key)
 	return h;
 }
 ```
-	
+
 ### 对树的调整操作
-1. **left rotate** 将树向左旋转 
+1. **left rotate** 将树向左旋转
 2. **right rotate** 将树向右选装
 3. **flip color**  转换结点以及儿子结点的颜色，该操作只在版本二中有使用
 
